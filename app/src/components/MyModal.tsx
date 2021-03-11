@@ -7,7 +7,8 @@ const MyModal = (props: any) => {
         show,
         className,
         onModalDismiss,
-        onModalUpdate
+        onModalUpdate,
+        saveEnabled
     } = props;
 
     const handleUpdate = () => {
@@ -22,7 +23,7 @@ const MyModal = (props: any) => {
                 {props.children}
             </ModalBody>
             <ModalFooter>
-                <Button color="primary" onClick={handleUpdate}>Save</Button>{' '}
+                <Button color="primary" onClick={handleUpdate} disabled={!saveEnabled}>Save</Button>{' '}
                 <Button color="secondary" onClick={onModalDismiss}>Cancel</Button>
             </ModalFooter>
         </Modal>

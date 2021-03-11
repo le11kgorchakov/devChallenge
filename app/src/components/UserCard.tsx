@@ -17,6 +17,11 @@ export const UserCard: React.FC<UserCardOptions> = props =>
     const [modal, setModal] = useState(false);
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
+    const [isChange, setChange] = useState(false);
+
+    useEffect(() => {
+        setChange(lastName === user.lastName || firstName === user.firstName);
+    }, [firstName, lastName])
 
     const toggleModal = () => {
         setModal(!modal);
@@ -48,7 +53,8 @@ export const UserCard: React.FC<UserCardOptions> = props =>
 			title="Edit User Information"
 			className="custom-modal"
 			onModalDismiss={() => setModal(false)}
-			onModalUpdate={onUserUpdate}>
+			onModalUpdate={onUserUpdate}
+			saveEnabled={isChange}>
 			<form>
 				<input type="text" name="firstName" placeholder="First Name" value={firstName} onChange={onChange} />
 				<input type="text" name="lastName" placeholder="Last Name" value={lastName} onChange={onChange} />
