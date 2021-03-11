@@ -67,9 +67,15 @@ export class App extends React.Component<any, AppState> {
     }
 
     handleUserSubmit = (user: User) => {
+        const newUser: User = {
+            userId: this.state.users ? this.state.users.length + 1 : 0,
+            firstName: user.firstName,
+            lastName: user.lastName
+        };
         this.setState((prevState) => ({
-            users: [...(prevState.users ?? []), user]
+            users: [...(prevState.users ?? []), newUser]
         }));
+        console.log(this.state.users);
     }
 
     handleUserRemove = (user: User) => {
