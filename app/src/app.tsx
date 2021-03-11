@@ -68,14 +68,14 @@ export class App extends React.Component<any, AppState> {
 
     handleUserSubmit = (user: User) => {
         const newUser: User = {
-            userId: this.state.users ? this.state.users.length + 1 : 0,
+            // Mapping all userIds into a separate array and finding the max value and adding 1
+            userId: this.state.users ? Math.max(...this.state.users.map(u => u.userId)) + 1 : 0,
             firstName: user.firstName,
             lastName: user.lastName
         };
         this.setState((prevState) => ({
             users: [...(prevState.users ?? []), newUser]
         }));
-        console.log(this.state.users);
     }
 
     handleUserRemove = (user: User) => {
@@ -85,6 +85,9 @@ export class App extends React.Component<any, AppState> {
     }
 
     handleUserUpdate = (user: User, index: number) => {
+        // Creating a temporary 'items' variable and mapping through it until we find the desired
+        // user based on it's index. Then we assign new values at the given index and update the state
+        // using setState
         const items = this.state.users?.map((item, i) =>
             i === index ?
                 {
@@ -122,8 +125,11 @@ export class App extends React.Component<any, AppState> {
                     {this.state.users?.map((user, index) =>
                         <li key={index}>
                             <UserCard user={user}
+                                      // passing down index value so that we know which user is being modified
                                       index={index}
                                       onUserRemove={() => this.handleUserRemove(user)}
+                                      // onUserUpdate is passed down to the child component but it calls the 'this.handleUserUpdate'
+                                      // and returns new user (firstName, lastName) and an index
                                       onUserUpdate={this.handleUserUpdate}/>
                         </li>)
                     }
