@@ -7,8 +7,10 @@ import { TaskCard } from './components/TaskCard';
 
 const database = {
     tasks: [],
-
-    users: [],
+    users: [
+        { userId: 1, firstName: 'mark', lastName: 'twain' },
+        { userId: 2, firstName: 'tom', lastName: 'sawyer' },
+    ],
 }
 
 interface AppState
@@ -25,6 +27,7 @@ export interface User
     lastName: string
     userId: number
     onUserSubmit?: any
+    onUserUpdate?: any
 }
 
 export interface Task
@@ -33,6 +36,7 @@ export interface Task
     description: string
     taskId: number
     onTaskSubmit?: any
+    onTaskUpdate?: any
 }
 
 export class App extends React.Component<any, AppState> {
@@ -62,22 +66,23 @@ export class App extends React.Component<any, AppState> {
         })
     }
 
-    handleUserSubmit = (user: User) =>
-    {
+    handleUserSubmit = (user: User) => {
         this.setState((prevState) => ({
             users: [...(prevState.users ?? []), user]
         }));
     }
 
-    handleUserRemove = (user: User) =>
-    {
+    handleUserRemove = (user: User) => {
         this.setState((prevState) => ({
             users: prevState.users?.filter(u => u !== user)
         }));
     }
 
-    handleTaskSubmit = (task: Task) =>
-    {
+    handleUserUpdate = (user: User) => {
+
+    }
+
+    handleTaskSubmit = (task: Task) => {
         this.setState((prevState) => ({
             tasks: [...(prevState.tasks ?? []), task]
         }));
@@ -90,6 +95,10 @@ export class App extends React.Component<any, AppState> {
         }));
     }
 
+    handleTaskUpdate = (task: Task) => {
+
+    }
+
     render()
     {
         return (
@@ -99,7 +108,10 @@ export class App extends React.Component<any, AppState> {
                 <ul>
                     {this.state.users?.map(user =>
                         <li>
-                            <UserCard user={user} key={user.userId} onUserRemove={() => this.handleUserRemove(user)} />
+                            <UserCard user={user}
+                                      key={user.userId}
+                                      onUserRemove={() => this.handleUserRemove(user)}
+                                      onUserUpdate={this.handleUserUpdate}/>
                         </li>)
                     }
                 </ul>
@@ -108,7 +120,10 @@ export class App extends React.Component<any, AppState> {
                 <ul>
                     {this.state.tasks?.map(task =>
                         <li>
-                            <TaskCard task={task} key={task.taskId} onTaskRemove={() => this.handleTaskRemove(task)} />
+                            <TaskCard task={task}
+                                      key={task.taskId}
+                                      onTaskRemove={() => this.handleTaskRemove(task)}
+                                      onTaskUpdate={this.handleTaskUpdate}/>
                         </li>)
                     }
                 </ul>

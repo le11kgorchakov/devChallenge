@@ -10,9 +10,11 @@
   "author": "inmotionnow",
   "license": "UNLICENSED",
   "dependencies": {
+    "bootstrap": "^4.6.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-hook-form": "^6.15.4"
+    "react-hook-form": "^6.15.4",
+    "reactstrap": "^8.9.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
