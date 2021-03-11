@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+
+body {
+  background-image: url("https://1219786023.rsc.cdn77.org/wp-content/uploads/2018/10/inmotionnow.jpg");
+  background-size: cover;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 0 0;
+}
+
+.app {
+  padding: 8px 20px;
+  font-family: "Work Sans", sans-serif;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 0;
+  background-color: #cfd8dc;
+  margin-bottom: 5px;
+}
+
+.button-bar {
+  margin: -10px -15px;
+}
+
+.button {
+  height: 41px;
+  border: 0;
+  padding: 10px;
+  color: white;
+}
+
+.button.button-edit {
+  background-color: #1565c0;
+}
+
+.button.button-remove {
+  background-color: #c2185b;
+  border-radius: 0 5px 5px 0;
+}
+
+.add-user {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 0;
+  background-color: #cfd8dc;
+  margin-bottom: 5px;
+}

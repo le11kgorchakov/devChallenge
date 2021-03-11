@@ -1,0 +1,15 @@
+{
+  "name": "inmo-dev-challenge-sqlserver",
+  "version": "0.0.0",
+  "description": "inmotionnow dev challenge sql server",
+  "scripts": {
+    "build:db": "docker build -t inmo-mssql-server .",
+    "restart:container": "docker restart inmo-dev-challenge-db",
+    "rm:container": "docker container rm inmo-dev-challenge-db",
+    "rm:image": "docker image rm inmo-mssql-server",
+    "start:db": "docker run -d -p 1433:1433 --name inmo-dev-challenge-db inmo-mssql-server",
+    "stop:db": "docker container stop inmo-dev-challenge-db"
+  },
+  "author": "inmotionnow",
+  "license": "UNLICENSED"
+}
