@@ -7,20 +7,23 @@ export interface UserCardOptions
         firstName: string
         lastName: string
     }
+    index: any
     onUserRemove: any
     onUserUpdate: any
 }
 
 export const UserCard: React.FC<UserCardOptions> = props =>
 {
-    const { user, onUserRemove, onUserUpdate } = props;
+    const { user, index, onUserRemove, onUserUpdate } = props;
     const [modal, setModal] = useState(false);
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
     const [isChange, setChange] = useState(false);
+    const [userToUpdate, setUserToUpdate] = useState({firstName: firstName, lastName: lastName});
 
     useEffect(() => {
-        setChange(lastName === user.lastName || firstName === user.firstName);
+        setChange(lastName !== user.lastName || firstName !== user.firstName);
+        setUserToUpdate({ firstName: firstName, lastName: lastName });
     }, [firstName, lastName])
 
     const toggleModal = () => {
@@ -38,12 +41,8 @@ export const UserCard: React.FC<UserCardOptions> = props =>
     }
 
     return <div className="user-item">
-        <div>
-            <text>First Name: {user.firstName} </text>
-        </div>
-        <div>
-            <text>Last Name: {user.lastName}</text>
-        </div>
+        <div>First Name: {user.firstName}</div>
+        <div>Last Name: {user.lastName}</div>
         <div className="button-bar">
             <button className="button button-edit" onClick={toggleModal}>Edit</button>
             <button className="button button-remove" onClick={onUserRemove}>Remove</button>
@@ -53,7 +52,7 @@ export const UserCard: React.FC<UserCardOptions> = props =>
 			title="Edit User Information"
 			className="custom-modal"
 			onModalDismiss={() => setModal(false)}
-			onModalUpdate={onUserUpdate}
+			onModalUpdate={() => onUserUpdate(userToUpdate, index)}
 			saveEnabled={isChange}>
 			<form>
 				<input type="text" name="firstName" placeholder="First Name" value={firstName} onChange={onChange} />

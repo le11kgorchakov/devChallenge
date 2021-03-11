@@ -78,8 +78,15 @@ export class App extends React.Component<any, AppState> {
         }));
     }
 
-    handleUserUpdate = (user: User) => {
-
+    handleUserUpdate = (user: User, index: number) => {
+        const items = this.state.users?.map((item, i) =>
+            i === index ?
+                {
+                    userId: item.userId,
+                    lastName: user.lastName,
+                    firstName: user.firstName
+                } : item);
+        this.setState({users: items});
     }
 
     handleTaskSubmit = (task: Task) => {
@@ -106,10 +113,10 @@ export class App extends React.Component<any, AppState> {
                 <h1>inMotionNow Developer Challenge</h1>
                 <h2>Users</h2>
                 <ul>
-                    {this.state.users?.map(user =>
-                        <li>
+                    {this.state.users?.map((user, index) =>
+                        <li key={index}>
                             <UserCard user={user}
-                                      key={user.userId}
+                                      index={index}
                                       onUserRemove={() => this.handleUserRemove(user)}
                                       onUserUpdate={this.handleUserUpdate}/>
                         </li>)
@@ -118,10 +125,9 @@ export class App extends React.Component<any, AppState> {
                 <AddUser onUserSubmit={this.handleUserSubmit} />
                 <h2>Tasks</h2>
                 <ul>
-                    {this.state.tasks?.map(task =>
-                        <li>
+                    {this.state.tasks?.map((task, index) =>
+                        <li key={index}>
                             <TaskCard task={task}
-                                      key={task.taskId}
                                       onTaskRemove={() => this.handleTaskRemove(task)}
                                       onTaskUpdate={this.handleTaskUpdate}/>
                         </li>)
