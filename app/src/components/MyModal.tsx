@@ -1,7 +1,18 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-const MyModal = (props: any) => {
+interface MyModalProps
+{
+    title: string
+    show: boolean
+    className: string | undefined
+    onModalDismiss: React.MouseEventHandler<HTMLButtonElement> | undefined
+    onModalUpdate: React.MouseEventHandler<HTMLButtonElement> | undefined
+    saveEnabled: boolean
+}
+
+const MyModal: React.FC<MyModalProps> = (props) =>
+{
     const {
         title,
         show,
@@ -11,9 +22,14 @@ const MyModal = (props: any) => {
         saveEnabled
     } = props;
 
-    const handleUpdate = () => {
-        onModalUpdate();
-        onModalDismiss();
+    const handleUpdate: React.MouseEventHandler<HTMLButtonElement> | undefined = (e) =>
+    {
+        if (onModalDismiss && onModalUpdate)
+        {
+            onModalUpdate(e);
+            onModalDismiss(e)
+        }
+
     }
 
     return (
