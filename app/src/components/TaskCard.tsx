@@ -7,6 +7,7 @@ export interface TaskCardOptions
         description: string
     }
     onTaskRemove: any
+    onTaskUpdate: any
 }
 
 export const TaskCard: React.FC<TaskCardOptions> = props =>
