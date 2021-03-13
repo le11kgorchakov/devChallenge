@@ -5,43 +5,45 @@ import { User } from "../app";
 
 interface UserPickerProps
 {
-    user?: User[] | undefined
-    onUserSelect?: any
+    users?: User[] | undefined
+    onUserSelect: any
 }
 
 
 
 const UserPicker: React.FC<UserPickerProps> = (props) =>
 {
-    const { user } = props
+    const { users } = props
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(prevState => !prevState);
-    const [selectedUser, setSelectedUser] = useState("Assign User")
+    const [selectedUser, setSelectedUser] = useState<string>("")
 
-    const handleChange: React.MouseEventHandler<HTMLOptionElement> | undefined = (e) =>
+    const handleChange = (user: User, index: number) =>
     {
-        setSelectedUser(e.currentTarget.value)
+        setSelectedUser(user.firstName + " " + user.lastName);
+        props.onUserSelect(index);
     }
 
-    const hadleClear: React.MouseEventHandler<HTMLElement> | undefined = (e) =>
-    {
-        setSelectedUser("Assign User")
-    }
+    // const handleClear = () =>
+    // {
+    //     setSelectedUser(null)
+    // }
+    console.log(selectedUser);
 
     return (
         <div>
             <Dropdown className="user-picker" isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle caret>
-                    {selectedUser}
+                    {selectedUser ? selectedUser : "Assign User"}
                 </DropdownToggle>
                 <DropdownMenu >
                     <DropdownItem header>available users</DropdownItem>
-                    {user ? user.map((u: User) =>
-                        < DropdownItem key={u.userId}>
-                            <option key={u.userId} onClick={(e) => handleChange(e)} >{u.firstName} {u.lastName} </option>
+                    {users ? users.map((u: User, i) =>
+                        < DropdownItem key={i} onClick={() => handleChange(u, i)}>
+                            <option key={i}>{u.firstName} {u.lastName} </option>
                         </DropdownItem>
                     ) : null}
-                    <DropdownItem className="clear-button" onClick={(e) => hadleClear(e)}>Clear</DropdownItem>
+                    {/* <DropdownItem className="clear-button" onClick={() => handleClear}>Clear</DropdownItem> */}
                 </DropdownMenu>
             </Dropdown>
         </div >

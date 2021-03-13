@@ -8,23 +8,27 @@ import { User } from "../app";
 import MyModal from "./MyModal";
 interface TaskCardProps
 {
-    user: User[] | undefined
+    users: User[] | undefined
     task: {
         taskName: string;
         description: string;
+        selectedUser?: any
     };
     index: number;
     onTaskRemove: any;
     onTaskUpdate: any;
+    onUserSelect: any;
 }
 const TaskCard: React.FC<TaskCardProps> = (props) =>
 {
     const {
-        user,
+        users,
         task,
         index,
         onTaskRemove: onTaskRemove,
         onTaskUpdate: onTaskUpdate,
+        onUserSelect: onUserSelect,
+
     } = props;
     const [modal, setModal] = useState(false);
     const [isChange, setChange] = useState(false);
@@ -53,7 +57,8 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
                     <CardTitle tag="h5">{`Task: ${task.taskName}`}</CardTitle>
                     <div>
                         <Badge variant="light">{"ToDo"}</Badge>
-                        <Badge variant="light">{"selected user"}</Badge>
+                        {/* <Badge variant="light">{task.selectedUser ? task.selectedUser : "User Not Selected"}</Badge> */}
+                        <div>{task.selectedUser ? task.selectedUser : "user not selected"}</div>
                     </div>
                 </CardHeader>
                 <CardBody>
@@ -72,7 +77,8 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
                         </div>
                         {modal && (
                             <MyModal
-                                user={user}
+                                onUserSelect={onUserSelect}
+                                users={users}
                                 userPicker={true}
                                 dropDown={true}
                                 size="lg"

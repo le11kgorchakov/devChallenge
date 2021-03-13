@@ -6,7 +6,7 @@ import UserPicker from './UserPicker';
 
 interface MyModalProps
 {
-    user?: User[] | undefined
+    users?: User[] | undefined
     userPicker: boolean
     dropDown: boolean
     size: string
@@ -15,12 +15,13 @@ interface MyModalProps
     className: string
     onModalDismiss: React.MouseEventHandler<HTMLButtonElement> | undefined
     onModalUpdate: any
+    onUserSelect?: any
     saveEnabled: boolean
 }
 const MyModal: React.FC<MyModalProps> = (props) =>
 {
     const {
-        user,
+        users,
         userPicker,
         dropDown,
         size,
@@ -29,6 +30,7 @@ const MyModal: React.FC<MyModalProps> = (props) =>
         className,
         onModalDismiss,
         onModalUpdate,
+        onUserSelect,
         saveEnabled
     } = props;
     const handleUpdate: React.MouseEventHandler<HTMLButtonElement> | undefined = (e) =>
@@ -44,14 +46,15 @@ const MyModal: React.FC<MyModalProps> = (props) =>
             <ModalHeader toggle={onModalDismiss}>{title}
                 <Form inline>
                     {dropDown && <DropDown />}
-                    {userPicker && <UserPicker user={user} />}
+                    {userPicker && <UserPicker onUserSelect={onUserSelect} users={users} />}
                 </Form>
             </ModalHeader>
             <ModalBody>
                 {props.children}
             </ModalBody>
             <ModalFooter>
-                <Button color="primary" onClick={handleUpdate} disabled={!saveEnabled}>Save</Button>
+                {/* <Button color="primary" onClick={handleUpdate} disabled={!saveEnabled}>Save</Button> */}
+                <Button color="primary" onClick={handleUpdate}>Save</Button>
                 <Button color="secondary" onClick={onModalDismiss}>Cancel</Button>
             </ModalFooter>
         </Modal>
