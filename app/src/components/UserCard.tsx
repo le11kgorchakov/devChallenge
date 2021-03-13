@@ -57,6 +57,7 @@ const UserCard: React.FC<UserCardProps> = (props) =>
                         </div>
                         {modal && (
                             <MyModal
+                                userPicker={false}
                                 dropDown={false}
                                 size="sm"
                                 show={modal}

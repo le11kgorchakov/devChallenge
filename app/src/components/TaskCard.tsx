@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import
 {
     Card, CardBody,
-    CardTitle, Button, CardSubtitle, Form, Input, FormGroup, Label
+    CardTitle, Button, CardSubtitle, Form, Input, FormGroup, Label, CardHeader, Badge
 } from 'reactstrap';
 import MyModal from "./MyModal";
 interface TaskCardProps
@@ -46,8 +46,15 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
     return (
         <div>
             <Card>
-                <CardBody>
+                <CardHeader>
                     <CardTitle tag="h5">{`Task: ${task.taskName}`}</CardTitle>
+                    <div>
+                        <Badge variant="light">{"ToDo"}</Badge>
+                        <Badge variant="light">{"Alexey Gorchakov"}</Badge>
+                    </div>
+                    <span className="sr-only">unread messages</span>
+                </CardHeader>
+                <CardBody>
                     <CardSubtitle>{"Description:"} {task.description} </CardSubtitle>
                     <div className="user-item">
                         <div>
@@ -59,6 +66,7 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
                         </div>
                         {modal && (
                             <MyModal
+                                userPicker={true}
                                 dropDown={true}
                                 size="lg"
                                 show={modal}

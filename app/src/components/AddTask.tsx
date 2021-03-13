@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+
 interface AddTaskProps
 {
     onTaskSubmit: any;
 }
+
 const AddTask: React.FC<AddTaskProps> = (props) =>
 {
     const [taskName, setTaskName] = useState("");

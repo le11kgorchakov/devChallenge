@@ -63,3 +63,8 @@ body {
   padding: 20px 30px;
   font-family: "Work Sans", sans-serif;
 }
+
+.user-picker {
+  position: relative;
+  left: 500px;
+}

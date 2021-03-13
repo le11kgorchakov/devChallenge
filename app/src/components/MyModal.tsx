@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
 import DropDown from './DropDown';
+import UserPicker from './UserPicker';
 
 interface MyModalProps
 {
+    userPicker: boolean
     dropDown: boolean
     size: string
     title: string
@@ -16,6 +18,7 @@ interface MyModalProps
 const MyModal: React.FC<MyModalProps> = (props) =>
 {
     const {
+        userPicker,
         dropDown,
         size,
         title,
@@ -35,7 +38,14 @@ const MyModal: React.FC<MyModalProps> = (props) =>
     }
     return (
         <Modal size={size} isOpen={show} toggle={onModalDismiss} className={className}>
-            <ModalHeader toggle={onModalDismiss}>{title} {dropDown && <DropDown />}</ModalHeader>
+            <ModalHeader toggle={onModalDismiss}>{title}
+                <Form inline>
+                    {dropDown && <DropDown />}
+                    {userPicker && <UserPicker />}
+                </Form>
+
+
+            </ModalHeader>
             <ModalBody>
                 {props.children}
             </ModalBody>
