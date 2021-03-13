@@ -10,10 +10,7 @@ const DropDown: React.FC = () =>
     const option = ["ToDo", "InProgress", "Completed"]
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [status, setStatus] = useState<string>(option[0])
-    const [isChange, setChange] = useState(false);
     const toggle = () => setDropdownOpen(prevState => !prevState);
-
-
 
 
     const handleChange: React.MouseEventHandler<HTMLOptionElement> | undefined = (e) =>

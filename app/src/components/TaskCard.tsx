@@ -53,9 +53,8 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
                     <CardTitle tag="h5">{`Task: ${task.taskName}`}</CardTitle>
                     <div>
                         <Badge variant="light">{"ToDo"}</Badge>
-                        <Badge variant="light">{"Alexey Gorchakov"}</Badge>
+                        <Badge variant="light">{"selected user"}</Badge>
                     </div>
-                    <span className="sr-only">unread messages</span>
                 </CardHeader>
                 <CardBody>
                     <CardSubtitle>{"Description:"} {task.description} </CardSubtitle>

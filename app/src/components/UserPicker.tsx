@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, ButtonDropdown } from "reactstrap"
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap"
 import { User } from "../app";
 
 
 interface UserPickerProps
 {
     user?: User[] | undefined
-    onSelect?: any
+    onUserSelect?: any
 }
 
 
@@ -21,12 +21,16 @@ const UserPicker: React.FC<UserPickerProps> = (props) =>
     const handleChange: React.MouseEventHandler<HTMLOptionElement> | undefined = (e) =>
     {
         setSelectedUser(e.currentTarget.value)
+        console.log(selectedUser)
+
     }
 
-    const hadleClear = (e: React.MouseEvent<HTMLElement, MouseEvent>) =>
+    const hadleClear: React.MouseEventHandler<HTMLElement> | undefined = (e) =>
     {
         setSelectedUser("Assign User")
     }
+
+
 
     return (
         <div>
@@ -41,7 +45,7 @@ const UserPicker: React.FC<UserPickerProps> = (props) =>
                             <option key={u.userId} onClick={(e) => handleChange(e)} >{u.firstName} {u.lastName} </option>
                         </DropdownItem>
                     ) : null}
-                    <DropdownToggle onClick={(e) => hadleClear(e)}>Clear</DropdownToggle>
+                    <DropdownItem className="clear-button" onClick={(e) => hadleClear(e)}>Clear</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         </div >
