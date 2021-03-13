@@ -17,7 +17,6 @@ interface TaskCardProps
     index: number;
     onTaskRemove: any;
     onTaskUpdate: any;
-    onUserSelect: any;
 }
 const TaskCard: React.FC<TaskCardProps> = (props) =>
 {
@@ -27,38 +26,38 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
         index,
         onTaskRemove: onTaskRemove,
         onTaskUpdate: onTaskUpdate,
-        onUserSelect: onUserSelect,
 
     } = props;
     const [modal, setModal] = useState(false);
     const [isChange, setChange] = useState(false);
     const [taskName, setTaskName] = useState(task.taskName);
     const [description, setDescription] = useState(task.description);
+    const [selectedUser, setSelectedUser] = useState(task.selectedUser || undefined);
     const [taskToUpdate, setTaskToUpdate] = useState(task);
-    useEffect(() =>
-    {
-        setChange(taskName !== task.taskName || description !== task.description);
-        setTaskToUpdate({ taskName: taskName, description: description });
-    }, [taskName, description]);
-    const toggleModal = () =>
-    {
+
+    useEffect(() => {
+        setChange(taskName !== task.taskName || description !== task.description || selectedUser !== task.selectedUser);
+        setTaskToUpdate({ taskName: taskName, description: description, selectedUser: selectedUser });
+    }, [taskName, description, selectedUser]);
+
+    const toggleModal = () => {
         setModal(!modal);
     };
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    {
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputName = e.target.name;
         if (inputName == "taskName") setTaskName(e.target.value);
         else if (inputName == "description") setDescription(e.target.value);
     };
+
     return (
         <div>
             <Card>
                 <CardHeader>
                     <CardTitle tag="h5">{`Task: ${task.taskName}`}</CardTitle>
                     <div>
-                        <Badge variant="light">{"ToDo"}</Badge>
-                        {/* <Badge variant="light">{task.selectedUser ? task.selectedUser : "User Not Selected"}</Badge> */}
-                        <div>{task.selectedUser ? task.selectedUser : "user not selected"}</div>
+                        <Badge variant="light">{"ToDo"}</Badge>&nbsp;
+                        <Badge variant="light">{task.selectedUser || task.selectedUser === 0 ? task.selectedUser : "User Not Selected"}</Badge>
                     </div>
                 </CardHeader>
                 <CardBody>
@@ -77,7 +76,6 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
                         </div>
                         {modal && (
                             <MyModal
-                                onUserSelect={onUserSelect}
                                 users={users}
                                 userPicker={true}
                                 dropDown={true}
@@ -87,6 +85,7 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
                                 className="custom-modal"
                                 onModalDismiss={() => setModal(false)}
                                 onModalUpdate={() => onTaskUpdate(taskToUpdate, index)}
+                                onUserSelect={() => setSelectedUser(index)}
                                 saveEnabled={isChange}
                             >
                                 <div>

@@ -53,8 +53,7 @@ const MyModal: React.FC<MyModalProps> = (props) =>
                 {props.children}
             </ModalBody>
             <ModalFooter>
-                {/* <Button color="primary" onClick={handleUpdate} disabled={!saveEnabled}>Save</Button> */}
-                <Button color="primary" onClick={handleUpdate}>Save</Button>
+                <Button color="primary" onClick={handleUpdate} disabled={!saveEnabled}>Save</Button>
                 <Button color="secondary" onClick={onModalDismiss}>Cancel</Button>
             </ModalFooter>
         </Modal>

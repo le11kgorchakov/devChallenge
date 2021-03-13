@@ -48,7 +48,7 @@ export class App extends React.Component<any, AppState> {
         tasks: [],
         users: [],
         newUser: {} as User,
-        newTask: {} as Task
+        newTask: {} as Task,
     }
 
     async componentDidMount()
@@ -118,21 +118,16 @@ export class App extends React.Component<any, AppState> {
 
     handleTaskUpdate = (task: Task, index: number) =>
     {
+        const user = this.state.users ? this.state.users[task.selectedUser] : undefined;
         const items = this.state.tasks?.map((item, i) =>
             i === index ?
                 {
                     taskId: item.taskId,
                     taskName: task.taskName,
                     description: task.description,
-                    selectedUser: () => this.handleUserSelect
+                    selectedUser: task.selectedUser || task.selectedUser === 0 ? user?.firstName + " " + user?.lastName : undefined
                 } : item);
         this.setState({ tasks: items });
-    }
-
-    handleUserSelect = (index: number) =>
-    {
-        console.log(index);
-        return (index);
     }
 
     render()
@@ -161,7 +156,6 @@ export class App extends React.Component<any, AppState> {
                                 index={i}
                                 onTaskRemove={() => this.handleTaskRemove(task)}
                                 onTaskUpdate={this.handleTaskUpdate}
-                                onUserSelect={this.handleUserSelect}
                             />
                         </li>)
                     }

@@ -97,4 +97,5 @@ const UserCard: React.FC<UserCardProps> = (props) =>
         </div>
     );
 };
+
 export default UserCard;

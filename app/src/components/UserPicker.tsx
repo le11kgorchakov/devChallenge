@@ -13,7 +13,7 @@ interface UserPickerProps
 
 const UserPicker: React.FC<UserPickerProps> = (props) =>
 {
-    const { users } = props
+    const { users, onUserSelect } = props
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(prevState => !prevState);
     const [selectedUser, setSelectedUser] = useState<string>("")
@@ -21,7 +21,7 @@ const UserPicker: React.FC<UserPickerProps> = (props) =>
     const handleChange = (user: User, index: number) =>
     {
         setSelectedUser(user.firstName + " " + user.lastName);
-        props.onUserSelect(index);
+        onUserSelect(index);
     }
 
     // const handleClear = () =>
