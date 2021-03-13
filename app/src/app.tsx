@@ -134,10 +134,10 @@ export class App extends React.Component<any, AppState> {
                 <h1>inMotionNow Developer Challenge</h1>
                 <h2>Users</h2>
                 <ul>
-                    {this.state.users?.map((user: User) =>
-                        <li key={user.userId}>
+                    {this.state.users?.map((user: User, i) =>
+                        <li key={i}>
                             <UserCard user={user}
-                                index={user.userId}
+                                index={i}
                                 onUserRemove={() => this.handleUserRemove(user)}
                                 onUserUpdate={this.handleUserUpdate} />
                         </li>)
@@ -146,11 +146,11 @@ export class App extends React.Component<any, AppState> {
                 <AddUser onUserSubmit={this.handleUserSubmit} />
                 <h2>Tasks</h2>
                 <ul>
-                    {this.state.tasks?.map((task: Task) =>
-                        <li key={task.taskId}>
+                    {this.state.tasks?.map((task: Task, i) =>
+                        <li key={i}>
                             <TaskCard task={task}
                                 user={this.state.users}
-                                index={task.taskId}
+                                index={i}
                                 onTaskRemove={() => this.handleTaskRemove(task)}
                                 onTaskUpdate={this.handleTaskUpdate} />
                         </li>)

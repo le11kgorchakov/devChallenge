@@ -57,7 +57,11 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
                     </div>
                 </CardHeader>
                 <CardBody>
-                    <CardSubtitle>{"Description:"} {task.description} </CardSubtitle>
+                    <CardSubtitle>
+                        <div className="task-description">
+                            {"Description:"} {task.description}
+                        </div>
+                    </CardSubtitle>
                     <div className="user-item">
                         <div>
                             {"Task Name:"} {task.taskName}

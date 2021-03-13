@@ -72,3 +72,8 @@ body {
   position: relative;
   left: 500px;
 }
+
+.task-description {
+  max-width: 550px;
+  word-wrap: break-word;
+}
