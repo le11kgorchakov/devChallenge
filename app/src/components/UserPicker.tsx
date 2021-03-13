@@ -28,7 +28,6 @@ const UserPicker: React.FC<UserPickerProps> = (props) =>
     // {
     //     setSelectedUser(null)
     // }
-    console.log(selectedUser);
 
     return (
         <div>
@@ -39,7 +38,7 @@ const UserPicker: React.FC<UserPickerProps> = (props) =>
                 <DropdownMenu >
                     <DropdownItem header>available users</DropdownItem>
                     {users ? users.map((u: User, i) =>
-                        < DropdownItem key={i} onClick={() => handleChange(u, i)}>
+                        <DropdownItem key={i} onClick={() => handleChange(u, i)}>
                             <option key={i}>{u.firstName} {u.lastName} </option>
                         </DropdownItem>
                     ) : null}

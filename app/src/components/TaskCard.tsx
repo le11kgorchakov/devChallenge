@@ -50,6 +50,10 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
         else if (inputName == "description") setDescription(e.target.value);
     };
 
+    const handleUserSelect = (index: number) => {
+        setSelectedUser(index);
+    }
+
     return (
         <div>
             <Card>
@@ -85,7 +89,7 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
                                 className="custom-modal"
                                 onModalDismiss={() => setModal(false)}
                                 onModalUpdate={() => onTaskUpdate(taskToUpdate, index)}
-                                onUserSelect={() => setSelectedUser(index)}
+                                onUserSelect={handleUserSelect}
                                 saveEnabled={isChange}
                             >
                                 <div>
