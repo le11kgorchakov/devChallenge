@@ -149,11 +149,14 @@ export class App extends React.Component<any, AppState> {
                     {this.state.tasks?.map((task, index) =>
                         <li key={index}>
                             <TaskCard task={task}
+                                user={this.state.users}
                                 index={index}
                                 onTaskRemove={() => this.handleTaskRemove(task)}
                                 onTaskUpdate={this.handleTaskUpdate} />
                         </li>)
                     }
+
+
                 </ul>
                 <AddTask onTaskSubmit={this.handleTaskSubmit} />
             </div>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
+import { User } from '../app';
 import DropDown from './DropDown';
 import UserPicker from './UserPicker';
 
 interface MyModalProps
 {
+    user?: User[] | undefined
     userPicker: boolean
     dropDown: boolean
     size: string
@@ -18,6 +20,7 @@ interface MyModalProps
 const MyModal: React.FC<MyModalProps> = (props) =>
 {
     const {
+        user,
         userPicker,
         dropDown,
         size,
@@ -41,7 +44,7 @@ const MyModal: React.FC<MyModalProps> = (props) =>
             <ModalHeader toggle={onModalDismiss}>{title}
                 <Form inline>
                     {dropDown && <DropDown />}
-                    {userPicker && <UserPicker />}
+                    {userPicker && <UserPicker user={user} />}
                 </Form>
 
 

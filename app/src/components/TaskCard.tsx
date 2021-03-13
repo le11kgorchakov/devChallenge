@@ -4,9 +4,11 @@ import
     Card, CardBody,
     CardTitle, Button, CardSubtitle, Form, Input, FormGroup, Label, CardHeader, Badge
 } from 'reactstrap';
+import { User } from "../app";
 import MyModal from "./MyModal";
 interface TaskCardProps
 {
+    user: User[] | undefined
     task: {
         taskName: string;
         description: string;
@@ -18,6 +20,7 @@ interface TaskCardProps
 const TaskCard: React.FC<TaskCardProps> = (props) =>
 {
     const {
+        user,
         task,
         index,
         onTaskRemove: onTaskRemove,
@@ -66,6 +69,7 @@ const TaskCard: React.FC<TaskCardProps> = (props) =>
                         </div>
                         {modal && (
                             <MyModal
+                                user={user}
                                 userPicker={true}
                                 dropDown={true}
                                 size="lg"
