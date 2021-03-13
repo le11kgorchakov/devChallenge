@@ -1,12 +1,15 @@
 import * as React from 'react'
 import './app.css'
-import { UserCard } from './components/UserCard';
-import { AddUser } from './components/AddUser';
-import { AddTask } from './components/AddTask';
-import { TaskCard } from './components/TaskCard';
+import AddTask from './components/AddTask';
+import AddUser from './components/AddUser';
+import TaskCard from './components/TaskCard';
+import UserCard from './components/UserCard';
 
 const database = {
-    tasks: [],
+    tasks: [
+        { taskId: 1, taskName: 'task 0001', description: 'this is task description' },
+        { taskId: 2, taskName: 'task 0002', description: 'this is task description' }
+    ],
     users: [
         { userId: 1, firstName: 'mark', lastName: 'twain' },
         { userId: 2, firstName: 'tom', lastName: 'sawyer' },
@@ -66,7 +69,8 @@ export class App extends React.Component<any, AppState> {
         })
     }
 
-    handleUserSubmit = (user: User) => {
+    handleUserSubmit = (user: User) =>
+    { // why this is not declared
         const newUser: User = {
             // Mapping all userIds into a separate array and finding the max value and adding 1
             userId: this.state.users ? Math.max(...this.state.users.map(u => u.userId)) + 1 : 0,
@@ -74,17 +78,20 @@ export class App extends React.Component<any, AppState> {
             lastName: user.lastName
         };
         this.setState((prevState) => ({
-            users: [...(prevState.users ?? []), newUser]
+            users: [...(prevState.users ?? []), newUser] // whta this is means
+
         }));
     }
 
-    handleUserRemove = (user: User) => {
+    handleUserRemove = (user: User) =>
+    {
         this.setState((prevState) => ({
             users: prevState.users?.filter(u => u !== user)
         }));
     }
 
-    handleUserUpdate = (user: User, index: number) => {
+    handleUserUpdate = (user: User, index: number) =>
+    {
         // Creating a temporary 'items' variable and mapping through it until we find the desired
         // user based on it's index. Then we assign new values at the given index and update the state
         // using setState
@@ -95,10 +102,11 @@ export class App extends React.Component<any, AppState> {
                     lastName: user.lastName,
                     firstName: user.firstName
                 } : item);
-        this.setState({users: items});
+        this.setState({ users: items });
     }
 
-    handleTaskSubmit = (task: Task) => {
+    handleTaskSubmit = (task: Task) =>
+    {
         this.setState((prevState) => ({
             tasks: [...(prevState.tasks ?? []), task]
         }));
@@ -111,7 +119,8 @@ export class App extends React.Component<any, AppState> {
         }));
     }
 
-    handleTaskUpdate = (task: Task) => {
+    handleTaskUpdate = (task: Task) =>
+    {
 
     }
 
@@ -125,12 +134,12 @@ export class App extends React.Component<any, AppState> {
                     {this.state.users?.map((user, index) =>
                         <li key={index}>
                             <UserCard user={user}
-                                      // passing down index value so that we know which user is being modified
-                                      index={index}
-                                      onUserRemove={() => this.handleUserRemove(user)}
-                                      // onUserUpdate is passed down to the child component but it calls the 'this.handleUserUpdate'
-                                      // and returns new user (firstName, lastName) and an index
-                                      onUserUpdate={this.handleUserUpdate}/>
+                                // passing down index value so that we know which user is being modified
+                                index={index}
+                                onUserRemove={() => this.handleUserRemove(user)}
+                                // onUserUpdate is passed down to the child component but it calls the 'this.handleUserUpdate'
+                                // and returns new user (firstName, lastName) and an index
+                                onUserUpdate={this.handleUserUpdate} />
                         </li>)
                     }
                 </ul>
@@ -140,10 +149,14 @@ export class App extends React.Component<any, AppState> {
                     {this.state.tasks?.map((task, index) =>
                         <li key={index}>
                             <TaskCard task={task}
-                                      onTaskRemove={() => this.handleTaskRemove(task)}
-                                      onTaskUpdate={this.handleTaskUpdate}/>
+                                user={this.state.users}
+                                index={index}
+                                onTaskRemove={() => this.handleTaskRemove(task)}
+                                onTaskUpdate={this.handleTaskUpdate} />
                         </li>)
                     }
+
+
                 </ul>
                 <AddTask onTaskSubmit={this.handleTaskSubmit} />
             </div>
