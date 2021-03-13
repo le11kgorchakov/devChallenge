@@ -46,8 +46,6 @@ const MyModal: React.FC<MyModalProps> = (props) =>
                     {dropDown && <DropDown />}
                     {userPicker && <UserPicker user={user} />}
                 </Form>
-
-
             </ModalHeader>
             <ModalBody>
                 {props.children}
@@ -60,3 +58,6 @@ const MyModal: React.FC<MyModalProps> = (props) =>
     );
 }
 export default MyModal;
+
+// pass selected user down to TaskCard
+// and show it on use Badge

@@ -70,15 +70,14 @@ export class App extends React.Component<any, AppState> {
     }
 
     handleUserSubmit = (user: User) =>
-    { // why this is not declared
+    {
         const newUser: User = {
-            // Mapping all userIds into a separate array and finding the max value and adding 1
             userId: this.state.users ? Math.max(...this.state.users.map(u => u.userId)) + 1 : 0,
             firstName: user.firstName,
             lastName: user.lastName
         };
         this.setState((prevState) => ({
-            users: [...(prevState.users ?? []), newUser] // whta this is means
+            users: [...(prevState.users ?? []), newUser]
 
         }));
     }
@@ -92,9 +91,6 @@ export class App extends React.Component<any, AppState> {
 
     handleUserUpdate = (user: User, index: number) =>
     {
-        // Creating a temporary 'items' variable and mapping through it until we find the desired
-        // user based on it's index. Then we assign new values at the given index and update the state
-        // using setState
         const items = this.state.users?.map((item, i) =>
             i === index ?
                 {
@@ -119,9 +115,16 @@ export class App extends React.Component<any, AppState> {
         }));
     }
 
-    handleTaskUpdate = (task: Task) =>
+    handleTaskUpdate = (task: Task, index: number) =>
     {
-
+        const items = this.state.tasks?.map((item, i) =>
+            i === index ?
+                {
+                    taskId: item.taskId,
+                    taskName: task.taskName,
+                    description: task.description
+                } : item);
+        this.setState({ tasks: items });
     }
 
     render()
@@ -131,14 +134,11 @@ export class App extends React.Component<any, AppState> {
                 <h1>inMotionNow Developer Challenge</h1>
                 <h2>Users</h2>
                 <ul>
-                    {this.state.users?.map((user, index) =>
-                        <li key={index}>
+                    {this.state.users?.map((user: User) =>
+                        <li key={user.userId}>
                             <UserCard user={user}
-                                // passing down index value so that we know which user is being modified
-                                index={index}
+                                index={user.userId}
                                 onUserRemove={() => this.handleUserRemove(user)}
-                                // onUserUpdate is passed down to the child component but it calls the 'this.handleUserUpdate'
-                                // and returns new user (firstName, lastName) and an index
                                 onUserUpdate={this.handleUserUpdate} />
                         </li>)
                     }
@@ -146,11 +146,11 @@ export class App extends React.Component<any, AppState> {
                 <AddUser onUserSubmit={this.handleUserSubmit} />
                 <h2>Tasks</h2>
                 <ul>
-                    {this.state.tasks?.map((task, index) =>
-                        <li key={index}>
+                    {this.state.tasks?.map((task: Task) =>
+                        <li key={task.taskId}>
                             <TaskCard task={task}
                                 user={this.state.users}
-                                index={index}
+                                index={task.taskId}
                                 onTaskRemove={() => this.handleTaskRemove(task)}
                                 onTaskUpdate={this.handleTaskUpdate} />
                         </li>)
