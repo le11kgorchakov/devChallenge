@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
-@import '~bootstrap/dist/css/bootstrap.css';
+@import "~bootstrap/dist/css/bootstrap.css";
 
 body {
-  background-image: url("https://1219786023.rsc.cdn77.org/wp-content/uploads/2018/10/inmotionnow.jpg");
+  background-image: url("https://martechseries.com/wp-content/uploads/2017/05/inmotionnow-1.png");
   background-size: cover;
   background-color: transparent;
   display: flex;
@@ -55,6 +55,11 @@ body {
   margin-bottom: 5px;
 }
 
-.custom-modal {
+.user-modal {
+  font-family: "Work Sans", sans-serif;
+}
+
+.task-modal {
+  padding: 20px 30px;
   font-family: "Work Sans", sans-serif;
 }
