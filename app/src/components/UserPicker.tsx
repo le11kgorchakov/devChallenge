@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap"
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap"
 import { User } from "../app";
 
 
@@ -21,16 +21,12 @@ const UserPicker: React.FC<UserPickerProps> = (props) =>
     const handleChange: React.MouseEventHandler<HTMLOptionElement> | undefined = (e) =>
     {
         setSelectedUser(e.currentTarget.value)
-        console.log(selectedUser)
-
     }
 
     const hadleClear: React.MouseEventHandler<HTMLElement> | undefined = (e) =>
     {
         setSelectedUser("Assign User")
     }
-
-
 
     return (
         <div>
@@ -41,7 +37,7 @@ const UserPicker: React.FC<UserPickerProps> = (props) =>
                 <DropdownMenu >
                     <DropdownItem header>available users</DropdownItem>
                     {user ? user.map((u: User) =>
-                        < DropdownItem >
+                        < DropdownItem key={u.userId}>
                             <option key={u.userId} onClick={(e) => handleChange(e)} >{u.firstName} {u.lastName} </option>
                         </DropdownItem>
                     ) : null}
