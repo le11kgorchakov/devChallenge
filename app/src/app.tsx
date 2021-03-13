@@ -40,6 +40,7 @@ export interface Task
     taskId: number
     onTaskSubmit?: any
     onTaskUpdate?: any
+    selectedUser?: any
 }
 
 export class App extends React.Component<any, AppState> {
@@ -122,9 +123,16 @@ export class App extends React.Component<any, AppState> {
                 {
                     taskId: item.taskId,
                     taskName: task.taskName,
-                    description: task.description
+                    description: task.description,
+                    selectedUser: () => this.handleUserSelect
                 } : item);
         this.setState({ tasks: items });
+    }
+
+    handleUserSelect = (index: number) =>
+    {
+        console.log(index);
+        return (index);
     }
 
     render()
@@ -149,10 +157,12 @@ export class App extends React.Component<any, AppState> {
                     {this.state.tasks?.map((task: Task, i) =>
                         <li key={i}>
                             <TaskCard task={task}
-                                user={this.state.users}
+                                users={this.state.users}
                                 index={i}
                                 onTaskRemove={() => this.handleTaskRemove(task)}
-                                onTaskUpdate={this.handleTaskUpdate} />
+                                onTaskUpdate={this.handleTaskUpdate}
+                                onUserSelect={this.handleUserSelect}
+                            />
                         </li>)
                     }
 
