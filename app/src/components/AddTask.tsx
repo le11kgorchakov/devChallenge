@@ -43,6 +43,7 @@ const AddTask: React.FC<AddTaskProps> = (props) =>
             <FormGroup className="add-user">
                 <Label>{"Task Name"}</Label>
                 <Input
+                    autoFocus
                     type="text"
                     name="taskName"
                     value={taskName}

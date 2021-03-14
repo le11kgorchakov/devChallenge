@@ -41,7 +41,7 @@ const AddUser: React.FC<Props> = (props) =>
         <Form inline>
             <FormGroup className="add-user">
                 <Label>{"First Name"}</Label>
-                <Input type="text" name="firstName" value={firstName} placeholder="enter your first name" onChange={onChange} />
+                <Input autoFocus type="text" name="firstName" value={firstName} placeholder="enter your first name" onChange={onChange} />
                 <Label>{"Last Name"}</Label>
                 <Input type="text" name="lastName" value={lastName} placeholder="enter your last name" onChange={onChange} />
                 <Button className="button button-edit" onClick={handleSubmit}>Add</Button>
