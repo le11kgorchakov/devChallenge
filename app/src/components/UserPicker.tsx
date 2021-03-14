@@ -17,6 +17,7 @@ const UserPicker: React.FC<UserPickerProps> = (props) =>
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(prevState => !prevState);
     const [selectedUser, setSelectedUser] = useState<string>("")
+    const defaultValue = "Assign User"
 
     const handleChange = (user: User, index: number) =>
     {
@@ -24,16 +25,16 @@ const UserPicker: React.FC<UserPickerProps> = (props) =>
         onUserSelect(index);
     }
 
-    // const handleClear = () =>
-    // {
-    //     setSelectedUser(null)
-    // }
+    const handleClear = () =>
+    {
+        setSelectedUser(defaultValue)
+    }
 
     return (
         <div>
             <Dropdown className="user-picker" isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle caret>
-                    {selectedUser ? selectedUser : "Assign User"}
+                    {selectedUser ? selectedUser : defaultValue}
                 </DropdownToggle>
                 <DropdownMenu >
                     <DropdownItem header>available users</DropdownItem>
@@ -42,7 +43,7 @@ const UserPicker: React.FC<UserPickerProps> = (props) =>
                             <option key={i}>{u.firstName} {u.lastName} </option>
                         </DropdownItem>
                     ) : null}
-                    {/* <DropdownItem className="clear-button" onClick={() => handleClear}>Clear</DropdownItem> */}
+                    <DropdownItem className="clear-button" onClick={handleClear}>Clear</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         </div >

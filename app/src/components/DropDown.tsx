@@ -1,12 +1,14 @@
 import React, { FormEventHandler, useEffect, useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { ProgressPlugin } from 'webpack';
 
-
-
-
-const DropDown: React.FC = () =>
+interface StatusDropDownProps
 {
+    onStatusChange: any
+}
+
+const StatusDropDown: React.FC<StatusDropDownProps> = (props) =>
+{
+    const { onStatusChange } = props
     const option = ["ToDo", "InProgress", "Completed"]
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [status, setStatus] = useState<string>(option[0])
@@ -15,7 +17,9 @@ const DropDown: React.FC = () =>
 
     const handleChange: React.MouseEventHandler<HTMLOptionElement> | undefined = (e) =>
     {
-        setStatus(e.currentTarget.value)
+        const selectedStatus = e.currentTarget.value
+        setStatus(selectedStatus)
+        onStatusChange(selectedStatus)
     }
 
     return (
@@ -38,4 +42,4 @@ const DropDown: React.FC = () =>
         </Dropdown>
     );
 }
-export default DropDown;
+export default StatusDropDown;

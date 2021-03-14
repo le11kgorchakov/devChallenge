@@ -45,9 +45,9 @@ body {
   border-radius: 0 5px 5px 0;
 }
 
-/* .clear-button {
+.clear-button {
   border-radius: 0 5px 5px 0;
-} */
+}
 
 .add-user {
   display: flex;
@@ -74,6 +74,6 @@ body {
 }
 
 .task-description {
-  max-width: 550px;
+  max-width: 400px;
   word-wrap: break-word;
 }

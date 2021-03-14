@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
 import { User } from '../app';
-import DropDown from './DropDown';
+import StatusDropDown from './DropDown';
 import UserPicker from './UserPicker';
 
 interface MyModalProps
@@ -16,8 +16,10 @@ interface MyModalProps
     onModalDismiss: React.MouseEventHandler<HTMLButtonElement> | undefined
     onModalUpdate: any
     onUserSelect?: any
+    onStatusChange?: any
     saveEnabled: boolean
 }
+
 const MyModal: React.FC<MyModalProps> = (props) =>
 {
     const {
@@ -30,9 +32,11 @@ const MyModal: React.FC<MyModalProps> = (props) =>
         className,
         onModalDismiss,
         onModalUpdate,
+        onStatusChange,
         onUserSelect,
         saveEnabled
     } = props;
+
     const handleUpdate: React.MouseEventHandler<HTMLButtonElement> | undefined = (e) =>
     {
         if (onModalDismiss && onModalUpdate)
@@ -41,11 +45,12 @@ const MyModal: React.FC<MyModalProps> = (props) =>
             onModalDismiss(e)
         }
     }
+
     return (
         <Modal size={size} isOpen={show} toggle={onModalDismiss} className={className}>
             <ModalHeader toggle={onModalDismiss}>{title}
                 <Form inline>
-                    {dropDown && <DropDown />}
+                    {dropDown && <StatusDropDown onStatusChange={onStatusChange} />}
                     {userPicker && <UserPicker onUserSelect={onUserSelect} users={users} />}
                 </Form>
             </ModalHeader>
@@ -60,6 +65,3 @@ const MyModal: React.FC<MyModalProps> = (props) =>
     );
 }
 export default MyModal;
-
-// pass selected user down to TaskCard
-// and show it on use Badge
